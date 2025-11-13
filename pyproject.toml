@@ -1,0 +1,77 @@
+[project]
+name = "firebomb"
+version = "1.0.0"
+description = "Firebase Security Testing Tool - Comprehensive CLI for Firebase security assessment"
+authors = [
+    {name = "Víctor Yrazusta", email = "victor@thecyberagents.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+keywords = ["firebase", "security", "pentesting", "vulnerability", "scanner"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+
+dependencies = [
+    "click>=8.1.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "rich>=13.7.0",
+    "firebase-admin>=6.4.0",
+    "pyjwt>=2.8.0",
+    "lxml>=5.0.0",
+    "httpx>=0.27.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.7.0",
+    "ruff>=0.0.285",
+    "mypy>=1.5.0",
+]
+
+[project.scripts]
+firebomb = "firebomb.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/Victoratus/firebomb"
+Repository = "https://github.com/Victoratus/firebomb"
+Issues = "https://github.com/Victoratus/firebomb/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/firebomb"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=firebomb --cov-report=term-missing"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
